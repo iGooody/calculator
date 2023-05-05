@@ -1,39 +1,66 @@
+import React, {useState} from 'react';
+
 import './App.css';
 function App() {
+  const [data, setData] = useState("");
+  const calcBtns = [];
+  [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, ".", "%"].forEach(item => {
+    calcBtns.push(
+      <button onClick={(e) => {
+        setData(data + e.target.value)
+      }} 
+      value={item} 
+      key={item}>
+      {item}
+      </button>
+    )
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-       Caclulator
-      </header>
-      <form className='form'>
-        <input className='textview' type = 'text'></input>
-        <table className='table'>
-          <tr>
-            <td> <input type = "button" className='button' value={'C'}></input></td>
-            <td> <input type = "button" className='button' value={'<'}></input></td>
-            <td> <input type = "button" className='button' value={'/'}></input></td>
-            <td> <input type = "button" className='button' value={'X'}></input></td>
-          </tr>
-          <tr>
-            <td> <input type = "button" className='button' value={7}></input></td>
-            <td> <input type = "button" className='button' Value={8}></input></td>
-            <td> <input type = "button" className='button' value={9}></input></td>
-            <td> <input type = "button" className='button' value={'-'}></input></td>
-          </tr>
-          <tr>
-            <td> <input type = "button" className='button' value={4}></input></td>
-            <td> <input type = "button" className='button' value={5}></input></td>
-            <td> <input type = "button" className='button' value={6}></input></td>
-            <td> <input type = "button" className='button' value={'+'}></input></td>
-          </tr>
-          <tr>
-            <td> <input type = "button" className='button' value={1}></input></td>
-            <td> <input type = "button" className='button' value={2}></input></td>
-            <td> <input type = "button" className='button' value={3}></input></td>
-            <td> <input type = "button" className='button' value={'='}></input></td>
-          </tr>
-        </table>
-      </form>
+    <div className='wrapper'>
+      <div className='show-input'>
+        {data}
+      </div>
+      <div className='wrapperbtn'>
+        {calcBtns}
+      </div>
+      <div className='numclear'>
+        <button className='buttonClear' onClick={() => setData(data.substr(0, data.length - 1))}>
+          Clear
+        </button>
+        <button onClick={ () => setData ("")}>
+          AC
+        </button>
+      </div>
+      <div className='operations'>
+        <button onClick={e => setData(data + e.target.value)} value={"+"}>
+          +
+        </button>
+        <button onClick={e => setData(data + e.target.value)}value={"-"}>
+          -
+        </button>
+        <button onClick={e => setData(data + e.target.value)} value={"/"}>
+          /
+        </button>
+        <button onClick={e => setData(data + e.target.value)} value={"*"}>
+          *
+        </button>
+        <button className='equal' onClick={e => {
+        try {
+          setData(
+            String(eval(data)).length > 3 && 
+            String(eval(data)).includes('.')
+           ? String(eval(data).toFixed(4))
+           : String(eval(data))
+           )
+        }
+        catch(err) {
+          console.log(err);
+        }
+      }}    value ="=">
+        =
+        </button>
+      </div>
+
     </div>
   );
 }

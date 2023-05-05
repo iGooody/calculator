@@ -1,34 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+}
 body {
-  background-color: #E6E6FA;
-}
-
-.App-header {
   display: flex;
+  height: 100vh;
+  align-items: center;
   justify-content: center;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  font-size: 38px;
+  background-color: #202020;
+}
+.wrapper {
+  max-width: 420px;
+  min-height: 96vh;
+  margin: 0 auto;
+  grid-template-areas:
+    "total total total total"
+    "modif modif modif oper"
+    "digit digit digit oper"
+    "digit digit digit oper"
+    "digit digit digit oper"
+    "digit digit digit oper";
+  grid-auto-columns: 1fr;
+}
+.show-input {
+  grid-area: total;
+  background-color:whitesmoke;
+  height: 70px;
+}
+.modifiers {
+  grid-area: modif;
+}
+.operations {
+  display: flex;
+  flex-direction: row;
+}
+.digits {
+  grid-area: digit;
 }
 
-.form {
-    display: flex;
-    align-self: center;
-    flex-direction: column;
-    align-items:center;
+.show-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 2rem;
 }
 
-.button {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(#e66465, #9198e5);
-  border-radius: 15%;
+.modifiers {
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
 }
-.button:hover {
-  background: yellow;
+
+.digits {
+  display: flex;
+  flex-wrap: wrap;
 }
-.textview {
-  margin: 10px;
-  border-radius: 10%;
-  width: 245px;
-  height: 60px;
-  font-size: 30px;
+.digits button {
+  flex: 1 0 26%;
+}
+.wrapper {
+  position: relative;
+  min-width: 300px;
+  min-height: 400px;
+  padding: 40px 30px 30px;
+  border-radius: 20px;
+  box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.25),
+    10px 10px 70px rgba(0, 0, 0, 0.25), inset -5px -5px 15px rgba(0, 0, 0, 0.25),
+    inset 5px 5px 15px rgba(0, 0, 0, 0.25);
+}
+.wrapper button {
+  color: #fff;
+  position: relative;
+  display: inline;
+  width: 80px;
+  place-items: center;
+  margin: 8px;
+  height: 80px;
+  background: linear-gradient(180deg, #2f2f2f, #3f3f3f);
+  box-shadow: inset -8px 0 8px rgba(0, 0, 0, 0.15),
+    inset 0 -8px 8px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(0, 0, 0, 0.75),
+    10px 20px 25px rgba(0, 0, 0, 0.4);
+  user-select: none;
+  cursor: pointer;
+  font-weight: 400;
+  border-radius: 10px;
+}
+.equal {
+  background: #2196f3;
+}
+.equal::before{
+  background: linear-gradient(90deg, #1479c9, #ffffff5c);
+  border-left: 1px solid #fff4;
+  border-bottom: 1px solid #fff4;
+  border-top: 1px solid #fff4;
+}
+.numclear {
+  display: flex;
+  width:100%;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	flex-wrap:wrap;
+}
+
+.numclear .button {
+  width: max-content;
 }
